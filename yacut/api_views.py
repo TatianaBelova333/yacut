@@ -53,7 +53,7 @@ def get_original_url(short_id):
     url_map = URLMap.query.filter_by(short=short_id).first()
     if not url_map:
         raise InvalidAPIUsage(
-                'Указанный id не найден',
-                404,
-            )
+            'Указанный id не найден',
+            404,
+        )
     return jsonify({"url": url_map.original}), 200
