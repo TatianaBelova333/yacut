@@ -1,0 +1,18 @@
+{% for category, message in get_flashed_messages(with_categories=true) %}
+  {% if category == url_success_cat %}
+    <h5 class="text-center">{{ message }}</h5>
+    {% if url_map %}
+      {% with url_href = url_for('short_url_view', short_id=url_map.short, _external=True) %}
+        <h5 class="text-center">
+          <a href="{{ url_href }}" target="_blank">
+            {{ url_href }}
+          </a>
+        </h5>
+      {% endwith %}
+    {% endif %}
+  {% elif category == duplicate_short_cat %}
+    <div class="col-sm">
+      <span style="color:red">{{ message }}</span>
+    </div>
+  {% endif %}
+{% endfor %}
