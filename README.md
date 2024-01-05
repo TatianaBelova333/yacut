@@ -49,11 +49,11 @@ python3 -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-# SOME REST API EXAMPLES
+## SOME REST API EXAMPLES
 
 Full documentation is available in openapi.yml.
 
-### Get the original url by a valid short_id
+#### Get the original url by a valid short_id
 
 `GET /api/id/{short_id}/`
 
@@ -65,7 +65,7 @@ Content-Type: application/json
   "url": "string"
 }
 ```
-### Get the original url by a non-existent short_id
+#### Get the original url by a non-existent short_id
 ```
 HTTP/1.1 404 Not Found
 Content-Type: application/json
@@ -75,7 +75,7 @@ Content-Type: application/json
 }
 ```
 
-### Create a short url
+#### Create a short url
 
 `POST /api/id/`
 
@@ -97,7 +97,7 @@ Content-Type: application/json
 }
 ```
 
-### Attempt to create an invalid short url
+#### Attempt to create an invalid short url
 ```
 Request body
 
