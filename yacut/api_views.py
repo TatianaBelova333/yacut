@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 from flask import jsonify, request, Blueprint
 
 from . import db
@@ -24,7 +26,7 @@ def generate_short_id():
 
     custom_id = data.get('custom_id')
 
-    if not custom_id:
+    if custom_id in (None, ''):
         short_id = get_unique_short_id()
     else:
         short_id = custom_id
@@ -45,7 +47,7 @@ def generate_short_id():
     )
     db.session.add(url_map)
     db.session.commit()
-    return jsonify(url_map.to_dict()), 201
+    return jsonify(url_map.to_dict()), HTTPStatus.CREATED
 
 
 @api_blueprint.route('/<string:short_id>/', methods=['GET'])
@@ -54,6 +56,6 @@ def get_original_url(short_id):
     if not url_map:
         raise InvalidAPIUsage(
             'Указанный id не найден',
-            404,
+            HTTPStatus.NOT_FOUND,
         )
-    return jsonify({"url": url_map.original}), 200
+    return jsonify({"url": url_map.original}), HTTPStatus.OK
